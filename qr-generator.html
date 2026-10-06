@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Carbonverse QR Generator</title>
+<style>body{font-family:system-ui;max-width:900px;margin:auto;padding:20px;background:#f5f9fc;color:#123}input{width:100%;padding:14px;border:1px solid #ccd;border-radius:10px;font-size:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:20px}.c{background:white;padding:16px;border-radius:15px;text-align:center;box-shadow:0 3px 14px #0001}img{max-width:160px}.btn{display:inline-block;padding:9px 12px;background:#1464f4;color:white;border-radius:9px;text-decoration:none;margin-top:7px}</style></head>
+<body><h1>CARBONVERSE QR Generator</h1><p>After your site is published, paste its base URL below. Example: https://YOUR-USERNAME.github.io/carbonverse/</p>
+<input id="base" placeholder="https://your-site.example/carbonverse/" oninput="go()"><div id="out" class="grid"></div>
+<script>
+const items=[["BUILD IT","build"],["NAME IT","name"],["CHALLENGE ME","challenge"],["ISOMER HUNT","isomer"],["CHECK MY ANSWER","check"],["DOUBT DOCTOR","doubt"],["CARBON QUIZ","quiz"]];
+function go(){let b=document.getElementById('base').value.trim();if(!b){out.innerHTML='';return}if(!b.endsWith('/'))b+='/';out.innerHTML=items.map(x=>{let u=b+'#'+x[1];let img='https://api.qrserver.com/v1/create-qr-code/?size=500x500&data='+encodeURIComponent(u);return `<div class=c><h3>${x[0]}</h3><img src="${img}" alt="QR"><br><a class=btn href="${img}" target="_blank">Open QR</a><p style="font-size:12px;word-break:break-all">${u}</p></div>`}).join('')}
+</script></body></html>
