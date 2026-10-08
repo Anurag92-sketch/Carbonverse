@@ -3,25 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CARBONVERSE | AI Carbon Challenge</title>
+<title>CARBONVERSE | Interactive Carbon Compound Explorer</title>
 <style>
-:root{--ink:#102a43;--muted:#5b7083;--bg:#f5f9fc;--card:#fff;--accent:#00a884;--accent2:#1464f4;--line:#dce7ef}
-*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink);background:var(--bg)}
-header{padding:34px 18px;background:linear-gradient(135deg,#062b3d,#0a6b63);color:white;text-align:center}
-h1{font-size:clamp(32px,7vw,60px);margin:0 0 5px;letter-spacing:2px}.tag{opacity:.9;font-size:17px}
-main{max-width:1050px;margin:auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+:root{--ink:#102a43;--muted:#5b7083;--bg:#f5f9fc;--card:#fff;--accent:#00a884;--accent2:#1464f4;--line:#dce7ef;--warn:#fff7e6}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink);background:var(--bg)}
+header{padding:30px 18px;background:linear-gradient(135deg,#062b3d,#0a6b63);color:white;text-align:center}
+h1{font-size:clamp(32px,7vw,60px);margin:0 0 5px;letter-spacing:2px}.tag{opacity:.92;font-size:17px}
+main{max-width:1050px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 20px #0b2b3d0c}
 .card h2{margin:0 0 8px;font-size:21px}.card p{color:var(--muted);line-height:1.5}
 button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accent2);color:white;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;margin:4px 3px 0 0}
 .btn.alt{background:#eaf2ff;color:#1451b8}.btn.green{background:var(--accent)}
-.panel{display:none}.panel.active{display:block}
-.back{background:#183b56}.field{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;font-size:16px;margin:8px 0}
+.panel{display:none}.panel.active{display:block}.back{background:#183b56}
+.field{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;font-size:16px;margin:8px 0}
 .result{background:#f0f7f5;border-left:5px solid var(--accent);padding:15px;border-radius:10px;margin-top:12px;line-height:1.55}
 .small{font-size:13px;color:var(--muted)}footer{text-align:center;padding:30px;color:var(--muted)}
 .chip{display:inline-block;padding:6px 10px;background:#edf6ff;border-radius:99px;margin:3px;font-size:13px}
 .question{font-size:21px;font-weight:750;margin:15px 0}.options button{display:block;width:100%;text-align:left;background:white;color:var(--ink);border:1px solid var(--line)}
 .options button:hover{border-color:#1464f4}
+.progress{font-size:13px;color:var(--muted);margin-top:10px}.tip{background:var(--warn);padding:12px;border-radius:10px;margin-top:12px}
 </style>
 </head>
 <body>
@@ -32,99 +33,119 @@ button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accen
 <main>
 <section id="home" class="panel active">
   <div class="card" style="margin-bottom:16px">
-    <h2>🧪 AI Carbon Challenge Hub</h2>
-    <p>A reusable learning space for carbon compounds, based on the supplied Class 10 lesson material. Choose a station below.</p>
+    <h2>🧪 Interactive Carbon Challenge Hub</h2>
+    <p>Explore carbon compounds through seven reusable learning stations. Each station contains a rotating bank of 10 questions/tasks.</p>
     <span class="chip">Catenation</span><span class="chip">Hydrocarbons</span><span class="chip">Isomerism</span><span class="chip">Functional Groups</span><span class="chip">Homologous Series</span><span class="chip">IUPAC Nomenclature</span>
   </div>
   <div class="grid">
-    <div class="card"><h2>🧩 Build It</h2><p>Construct or identify structures from molecular formulae and bond information.</p><a class="btn" href="#build">Open</a></div>
-    <div class="card"><h2>🔤 Name It</h2><p>Practise the IUPAC naming steps used for straight-chain carbon compounds.</p><a class="btn" href="#name">Open</a></div>
-    <div class="card"><h2>🎯 Challenge Me</h2><p>Get a random carbon-compound challenge and check your response.</p><a class="btn" href="#challenge">Open</a></div>
-    <div class="card"><h2>🔄 Isomer Hunt</h2><p>Explore structural isomerism through molecular formula challenges.</p><a class="btn" href="#isomer">Open</a></div>
-    <div class="card"><h2>✅ Check My Answer</h2><p>Compare your answer with guided reasoning and correction.</p><a class="btn" href="#check">Open</a></div>
-    <div class="card"><h2>👩‍🔬 Doubt Doctor</h2><p>Ask an AI assistant about a carbon-compound doubt.</p><a class="btn" href="#doubt">Open</a></div>
-    <div class="card"><h2>🏆 Carbon Quiz</h2><p>Quick MCQ practice from the lesson.</p><a class="btn" href="#quiz">Open</a></div>
+    <div class="card"><h2>🧩 Build It</h2><p>Construct structures from formulae, names and bond information.</p><a class="btn" href="#build">Open</a></div>
+    <div class="card"><h2>🔤 Name It</h2><p>Practise IUPAC naming of carbon compounds.</p><a class="btn" href="#name">Open</a></div>
+    <div class="card"><h2>🎯 Challenge Me</h2><p>Answer concept-based carbon-compound challenges.</p><a class="btn" href="#challenge">Open</a></div>
+    <div class="card"><h2>🔄 Isomer Hunt</h2><p>Find and reason about structural isomers.</p><a class="btn" href="#isomer">Open</a></div>
+    <div class="card"><h2>✅ Check My Answer</h2><p>Type an answer and receive instant feedback.</p><a class="btn" href="#check">Open</a></div>
+    <div class="card"><h2>👩‍🔬 Doubt Doctor</h2><p>Use AI-guided prompts to explore a doubt.</p><a class="btn" href="#doubt">Open</a></div>
+    <div class="card"><h2>🏆 Carbon Quiz</h2><p>Take a 10-question interactive quiz.</p><a class="btn" href="#quiz">Open</a></div>
   </div>
 </section>
 
-<section id="build" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>🧩 BUILD IT</h2>
-<p>Use the prompt to construct the structure with your physical Carbonverse model.</p>
-<select id="buildSel" class="field"><option value="">Choose a challenge</option><option>Ethane — C₂H₆</option><option>Ethene — C₂H₄</option><option>Ethyne — C₂H₂</option><option>Propane — C₃H₈</option><option>Propene — C₃H₆</option><option>Propyne — C₃H₄</option></select>
-<button onclick="build()">Reveal construction guide</button><div id="buildOut"></div>
+<section id="build" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>🧩 BUILD IT</h2>
+<p>Use your physical Carbonverse model to construct the requested compound.</p>
+<div id="buildQuestion" class="question"></div><div id="buildOut"></div><div class="progress" id="buildProgress"></div>
+<button onclick="nextBuild()">Next Task</button><button class="btn alt" onclick="showBuildAnswer()">Show Guide</button>
 </div></section>
 
-<section id="name" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>🔤 NAME IT</h2>
-<p>Apply the lesson's IUPAC sequence: parent chain → suffix/prefix → numbering → final name.</p>
-<select id="nameSel" class="field"><option value="">Choose a structure</option><option value="ethanol">CH₃–CH₂–OH</option><option value="propanol">CH₃–CH₂–CH₂–OH</option><option value="propane">CH₃–CH₂–CH₃</option><option value="propene">CH₃–CH=CH₂</option><option value="propyne">CH₃–C≡CH</option><option value="ethanoic">CH₃–COOH</option><option value="propanal">CH₃–CH₂–CHO</option><option value="propanone">CH₃–CO–CH₃</option></select>
-<button onclick="nameIt()">Show guided answer</button><div id="nameOut"></div>
+<section id="name" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>🔤 NAME IT</h2>
+<p>Apply: parent chain → numbering → functional group/bond → final IUPAC name.</p>
+<div id="nameQuestion" class="question"></div>
+<input id="nameAnswer" class="field" placeholder="Type the IUPAC name">
+<button onclick="checkNameQuestion()">Check</button><button class="btn alt" onclick="showNameAnswer()">Show Answer</button>
+<div id="nameOut"></div><div class="progress" id="nameProgress"></div>
+<button onclick="nextName()">Next Question</button>
 </div></section>
 
-<section id="challenge" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>🎯 CHALLENGE ME</h2><p id="cq" class="question"></p><div id="co" class="options"></div><div id="cr"></div><button onclick="newChallenge()">New challenge</button></div>
-</section>
-
-<section id="isomer" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>🔄 ISOMER HUNT</h2>
-<p>Structural isomers have the same molecular formula but different structural formulae.</p>
-<select id="isoSel" class="field"><option value="">Choose a formula</option><option value="C4H10">C₄H₁₀</option><option value="C5H12">C₅H₁₂</option></select>
-<button onclick="isomer()">Check</button><div id="isoOut"></div>
+<section id="challenge" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>🎯 CHALLENGE ME</h2>
+<div id="challengeQuestion" class="question"></div><div id="challengeOptions" class="options"></div><div id="challengeResult"></div><div class="progress" id="challengeProgress"></div>
+<button onclick="nextChallenge()">Next Challenge</button>
 </div></section>
 
-<section id="check" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>✅ CHECK MY ANSWER</h2>
-<p>Type a proposed IUPAC name for the displayed structure.</p>
-<select id="checkStruct" class="field"><option value="CH₃–CH₂–OH">CH₃–CH₂–OH</option><option value="CH₃–CH₂–CH₃">CH₃–CH₂–CH₃</option><option value="CH₃–CH=CH₂">CH₃–CH=CH₂</option><option value="CH₃–C≡CH">CH₃–C≡CH</option><option value="CH₃–COOH">CH₃–COOH</option></select>
-<input id="answer" class="field" placeholder="Enter your IUPAC name">
-<button onclick="checkAnswer()">Check answer</button><div id="checkOut"></div>
+<section id="isomer" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>🔄 ISOMER HUNT</h2>
+<p>Find the number of structural isomers or identify the expected structures.</p>
+<div id="isomerQuestion" class="question"></div>
+<input id="isomerAnswer" class="field" placeholder="Type your answer">
+<button onclick="checkIsomer()">Check</button><button class="btn alt" onclick="showIsomerAnswer()">Show Answer</button>
+<div id="isomerOut"></div><div class="progress" id="isomerProgress"></div>
+<button onclick="nextIsomer()">Next Hunt</button>
 </div></section>
 
-<section id="doubt" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>👩‍🔬 DOUBT DOCTOR</h2>
-<p>Write your doubt below. This page gives you a ready AI prompt. Tap “Ask AI” to open ChatGPT and paste the prompt.</p>
-<textarea id="doubtText" class="field" rows="6" placeholder="Example: Why is ethene unsaturated?"></textarea>
-<button onclick="askAI()">Ask AI</button>
-<div class="result"><b>AI instruction:</b> Explain at Class 10 Maharashtra State Board level. Use simple language, one example, and correct any misconception. Do not go beyond the supplied Carbonverse lesson unless necessary.</div>
+<section id="check" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>✅ CHECK MY ANSWER</h2>
+<p>Type the IUPAC name you think is correct. The site will check it.</p>
+<div id="checkQuestion" class="question"></div>
+<input id="checkAnswerInput" class="field" placeholder="Enter your proposed IUPAC name">
+<button onclick="checkMyAnswer()">Check Answer</button><div id="checkOut"></div><div class="progress" id="checkProgress"></div>
+<button onclick="nextCheck()">Next Question</button>
 </div></section>
 
-<section id="quiz" class="panel">
-<div class="card"><a class="btn back" href="#home">← Home</a><h2>🏆 CARBON QUIZ</h2><div id="quizBox"></div><button onclick="startQuiz()">Start / Restart</button></div>
-</section>
+<section id="doubt" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>👩‍🔬 DOUBT DOCTOR</h2>
+<p>Choose a suggested doubt or type your own. The prompt can be opened in ChatGPT for an explanation.</p>
+<div id="doubtQuestion" class="question"></div>
+<textarea id="doubtText" class="field" rows="5" placeholder="Edit the doubt here, or type your own question."></textarea>
+<button onclick="askAI()">Ask AI</button><button class="btn alt" onclick="useSuggestedDoubt()">Use Suggested Doubt</button>
+<div id="doubtOut"></div><div class="progress" id="doubtProgress"></div>
+<button onclick="nextDoubt()">Next Doubt</button>
+<div class="tip"><b>Teacher note:</b> The question bank is stored separately in <b>questions.js</b>, so you can edit the wording later without changing the QR codes.</div>
+</div></section>
 
-<footer>CARBONVERSE • A reusable digital teaching-aid concept for carbon compounds</footer>
+<section id="quiz" class="panel"><div class="card">
+<a class="btn back" href="#home">← Home</a><h2>🏆 CARBON QUIZ</h2>
+<div id="quizBox"></div><div class="progress" id="quizProgress"></div>
+<button onclick="startQuiz()">Start / Restart Quiz</button>
+</div></section>
+
+<footer>CARBONVERSE • Reusable digital teaching aid for carbon compounds</footer>
 </main>
+<script src="questions.js"></script>
 <script>
-const guides={
-"Ethane — C₂H₆":"Join 2 carbon atoms with a single bond. Add 6 H atoms to satisfy tetravalency. Saturated hydrocarbon; alkane.",
-"Ethene — C₂H₄":"Join 2 carbon atoms. A double bond is needed to satisfy tetravalency. Add 4 H atoms. Unsaturated; alkene.",
-"Ethyne — C₂H₂":"Join 2 carbon atoms. A triple bond is needed to satisfy tetravalency. Add 2 H atoms. Unsaturated; alkyne.",
-"Propane — C₃H₈":"Join 3 carbon atoms in a straight chain using single bonds. Add H atoms to satisfy tetravalency. Saturated alkane.",
-"Propene — C₃H₆":"Join 3 carbon atoms. Introduce one C=C double bond, then add H atoms to satisfy tetravalency. Alkene.",
-"Propyne — C₃H₄":"Join 3 carbon atoms. Introduce one C≡C triple bond, then add H atoms to satisfy tetravalency. Alkyne."
-};
-function build(){let v=buildSel.value; buildOut.innerHTML=v?`<div class="result"><b>Construction:</b> ${guides[v]}</div>`:''}
-const names={ethanol:["ethanol","2 carbons → ethane parent; –OH gives alcohol suffix –ol."],propanol:["propan-1-ol","3 carbons → propane parent; number from the OH end; –ol suffix."],propane:["propane","3 carbons; saturated chain; parent alkane is propane."],propene:["propene","3 carbons; C=C present; parent ending changes from –ane to –ene."],propyne:["propyne","3 carbons; C≡C present; parent ending changes from –ane to –yne."],ethanoic:["ethanoic acid","2 carbons → ethane parent; –COOH gives –oic acid."],propanal:["propanal","3 carbons → propane parent; –CHO gives –al."],propanone:["propanone","3 carbons → propane parent; ketone gives –one."]};
-function nameIt(){let v=nameSel.value; nameOut.innerHTML=v?`<div class="result"><b>IUPAC name:</b> ${names[v][0]}<br>${names[v][1]}</div>`:''}
-const challenges=[
-["Which class contains C=C?","Alkenes",["Alkanes","Alkenes","Alkynes","Alcohols"]],
-["Which class contains C≡C?","Alkynes",["Alkanes","Alkenes","Alkynes","Aldehydes"]],
-["What is the smallest hydrocarbon?","Methane",["Ethane","Methane","Propane","Benzene"]],
-["C₄H₁₀ shows structural isomerism. What does this mean?","Same molecular formula, different structural formulae",["Different formula, same structure","Same molecular formula, different structural formulae","Same name, same structure","Different elements only"]]
-];
-let ci=0;
-function newChallenge(){let x=challenges[Math.floor(Math.random()*challenges.length)]; cq.textContent=x[0]; co.innerHTML=x[2].map(o=>`<button onclick="this.parentElement.nextElementSibling.innerHTML='<div class=result><b>${o===x[1]?'Correct!':'Try again.'}</b> ${o===x[1]?'Good reasoning.':'Review the lesson concept and try once more.'}</div>'">${o}</button>`).join('');cr.innerHTML=''}
-const iso={"C4H10":"Two structural isomers: n-butane and isobutane.","C5H12":"Three structural isomers: n-pentane, isopentane and neopentane."};
-function isomer(){let v=isoSel.value;isoOut.innerHTML=v?`<div class="result">${iso[v]}<br><span class="small">Same molecular formula, different structural formulae.</span></div>`:''}
-const ans={"CH₃–CH₂–OH":"ethanol","CH₃–CH₂–CH₃":"propane","CH₃–CH=CH₂":"propene","CH₃–C≡CH":"propyne","CH₃–COOH":"ethanoic acid"};
-function checkAnswer(){let s=checkStruct.value,a=answer.value.trim().toLowerCase();let ok=a===ans[s];checkOut.innerHTML=`<div class="result"><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: <b>${ans[s]}</b><br>${ok?'Excellent.':'Use the parent chain and functional group before finalising the name.'}</div>`}
-function askAI(){let d=doubtText.value.trim()||"Explain carbon compounds from the Carbonverse lesson.";let p=`You are the Carbonverse AI chemistry mentor. Help a Class 10 Maharashtra State Board student with carbon compounds. Use simple language and the lesson topics: catenation, hydrocarbons, saturated/unsaturated compounds, straight/branched/cyclic chains, structural isomerism, functional groups, homologous series and IUPAC nomenclature. Doubt: ${d}`;navigator.clipboard?.writeText(p).catch(()=>{}); window.open('https://chatgpt.com/','_blank')}
-const qs=[["Carbon's ability to form strong C–C bonds is called?","Catenation power"],["Ethene is saturated or unsaturated?","Unsaturated"],["The same molecular formula but different structural formulae is called?","Structural isomerism"],["One –CH₂– unit is added between neighbouring homologues.","True"],["C≡C indicates which hydrocarbon class?","Alkyne"]];
-let qi=0;
-function startQuiz(){qi=0;renderQ()}
-function renderQ(){if(qi>=qs.length){quizBox.innerHTML='<div class=result><b>Quiz complete!</b> Well done.</div>';return}let q=qs[qi];quizBox.innerHTML=`<div class=question>${q[0]}</div><input id=qans class=field placeholder="Type your answer"><button onclick="gradeQ()">Submit</button><div id=qres></div>`}
-function gradeQ(){let a=qans.value.trim().toLowerCase(),ok=a===qs[qi][1].toLowerCase();qres.innerHTML=`<div class=result>${ok?'Correct ✓':'Review this concept.'}<br><b>Answer:</b> ${qs[qi][1]}</div>`;setTimeout(()=>{qi++;renderQ()},900)}
-function route(){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));let id=location.hash.slice(1)||'home';(document.getElementById(id)||document.getElementById('home')).classList.add('active');if(id==='challenge')newChallenge()}
+const state={build:0,name:0,challenge:0,isomer:0,check:0,doubt:0,quiz:0};
+
+function nextBuild(){state.build=(state.build+1)%BUILD_QUESTIONS.length;renderBuild()}
+function renderBuild(){const q=BUILD_QUESTIONS[state.build];buildQuestion.textContent=q.question;buildOut.innerHTML='';buildProgress.textContent=`Task ${state.build+1} of ${BUILD_QUESTIONS.length}`}
+function showBuildAnswer(){buildOut.innerHTML=`<div class=result><b>Construction guide:</b> ${BUILD_QUESTIONS[state.build].answer}</div>`}
+
+function nextName(){state.name=(state.name+1)%NAME_QUESTIONS.length;nameAnswer.value='';nameOut.innerHTML='';renderName()}
+function renderName(){const q=NAME_QUESTIONS[state.name];nameQuestion.textContent=q.question;nameProgress.textContent=`Question ${state.name+1} of ${NAME_QUESTIONS.length}`}
+function showNameAnswer(){nameOut.innerHTML=`<div class=result><b>Answer:</b> ${NAME_QUESTIONS[state.name].answer}<br>${NAME_QUESTIONS[state.name].reason}</div>`}
+function checkNameQuestion(){const q=NAME_QUESTIONS[state.name];const a=nameAnswer.value.trim().toLowerCase();const ok=a===q.answer.toLowerCase();nameOut.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: <b>${q.answer}</b><br>${q.reason}</div>`}
+
+function nextChallenge(){state.challenge=(state.challenge+1)%CHALLENGE_QUESTIONS.length;renderChallenge()}
+function renderChallenge(){const q=CHALLENGE_QUESTIONS[state.challenge];challengeQuestion.textContent=q.question;challengeOptions.innerHTML=q.options.map((o,i)=>`<button onclick="gradeChallenge(${i})">${o}</button>`).join('');challengeResult.innerHTML='';challengeProgress.textContent=`Challenge ${state.challenge+1} of ${CHALLENGE_QUESTIONS.length}`}
+function gradeChallenge(i){const q=CHALLENGE_QUESTIONS[state.challenge];const ok=i===q.answer;challengeResult.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Try again.'}</b><br>${q.explanation}</div>`}
+
+function nextIsomer(){state.isomer=(state.isomer+1)%ISOMER_QUESTIONS.length;isomerAnswer.value='';isomerOut.innerHTML='';renderIsomer()}
+function renderIsomer(){isomerQuestion.textContent=ISOMER_QUESTIONS[state.isomer].question;isomerProgress.textContent=`Hunt ${state.isomer+1} of ${ISOMER_QUESTIONS.length}`}
+function showIsomerAnswer(){const q=ISOMER_QUESTIONS[state.isomer];isomerOut.innerHTML=`<div class=result><b>Answer:</b> ${q.answer}<br>${q.explanation}</div>`}
+function checkIsomer(){const q=ISOMER_QUESTIONS[state.isomer];const a=isomerAnswer.value.trim().toLowerCase();const ok=q.accept.some(x=>x.toLowerCase()===a);isomerOut.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: ${q.answer}<br>${q.explanation}</div>`}
+
+function nextCheck(){state.check=(state.check+1)%CHECK_QUESTIONS.length;checkAnswerInput.value='';checkOut.innerHTML='';renderCheck()}
+function renderCheck(){checkQuestion.textContent=CHECK_QUESTIONS[state.check].question;checkProgress.textContent=`Question ${state.check+1} of ${CHECK_QUESTIONS.length}`}
+function checkMyAnswer(){const q=CHECK_QUESTIONS[state.check];const a=checkAnswerInput.value.trim().toLowerCase();const ok=q.accept.some(x=>x.toLowerCase()===a);checkOut.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: <b>${q.answer}</b><br>${q.explanation}</div>`}
+
+function nextDoubt(){state.doubt=(state.doubt+1)%DOUBT_QUESTIONS.length;renderDoubt()}
+function renderDoubt(){const q=DOUBT_QUESTIONS[state.doubt];doubtQuestion.textContent=q.question;doubtText.value=q.question;doubtOut.innerHTML='';doubtProgress.textContent=`Suggested doubt ${state.doubt+1} of ${DOUBT_QUESTIONS.length}`}
+function useSuggestedDoubt(){doubtText.value=DOUBT_QUESTIONS[state.doubt].question}
+function askAI(){const d=doubtText.value.trim()||DOUBT_QUESTIONS[state.doubt].question;const p=`You are the Carbonverse AI chemistry mentor. Explain this carbon-compounds doubt at Class 10 Maharashtra State Board level using simple language, one suitable example, and correct misconceptions. Doubt: ${d}`;navigator.clipboard?.writeText(p).catch(()=>{});doubtOut.innerHTML='<div class=result><b>Prompt copied.</b> ChatGPT will open in a new tab. Paste the prompt if it is not already inserted.</div>';window.open('https://chatgpt.com/','_blank')}
+
+function startQuiz(){state.quiz=0;renderQuiz()}
+function renderQuiz(){if(state.quiz>=QUIZ_QUESTIONS.length){quizBox.innerHTML='<div class=result><b>Quiz complete! 🎉</b> You completed all 10 questions.</div>';quizProgress.textContent='10 of 10 completed';return}const q=QUIZ_QUESTIONS[state.quiz];quizBox.innerHTML=`<div class=question>${q.question}</div><div class=options>${q.options.map((o,i)=>`<button onclick="gradeQuiz(${i})">${o}</button>`).join('')}</div>`;quizProgress.textContent=`Question ${state.quiz+1} of ${QUIZ_QUESTIONS.length}`}
+function gradeQuiz(i){const q=QUIZ_QUESTIONS[state.quiz];const ok=i===q.answer;quizBox.innerHTML+=`<div class=result><b>${ok?'Correct ✓':'Review this concept.'}</b><br>${q.explanation}</div><button onclick="nextQuiz()">Next Question</button>`}
+function nextQuiz(){state.quiz++;renderQuiz()}
+
+function route(){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));let id=location.hash.slice(1)||'home';(document.getElementById(id)||document.getElementById('home')).classList.add('active');if(id==='build')renderBuild();if(id==='name')renderName();if(id==='challenge')renderChallenge();if(id==='isomer')renderIsomer();if(id==='check')renderCheck();if(id==='doubt')renderDoubt();if(id==='quiz')startQuiz()}
 window.addEventListener('hashchange',route);route();
 </script>
 </body></html>
