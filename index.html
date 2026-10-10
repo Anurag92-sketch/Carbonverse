@@ -28,13 +28,13 @@ button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accen
 <body>
 <header>
   <h1>CARBONVERSE</h1>
-  <div class="tag">Explore • Construct • Name • Challenge • Understand</div>
+  <div class="tag">Explore • Construct • Name • Challenge • Check</div>
 </header>
 <main>
 <section id="home" class="panel active">
   <div class="card" style="margin-bottom:16px">
     <h2>🧪 Interactive Carbon Challenge Hub</h2>
-    <p>Explore carbon compounds through seven reusable learning stations. Each station contains a rotating bank of 10 questions/tasks.</p>
+    <p>Explore carbon compounds through six reusable learning stations. Each station contains a rotating bank of 10 questions/tasks.</p>
     <span class="chip">Catenation</span><span class="chip">Hydrocarbons</span><span class="chip">Isomerism</span><span class="chip">Functional Groups</span><span class="chip">Homologous Series</span><span class="chip">IUPAC Nomenclature</span>
   </div>
   <div class="grid">
@@ -43,7 +43,6 @@ button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accen
     <div class="card"><h2>🎯 Challenge Me</h2><p>Answer concept-based carbon-compound challenges.</p><a class="btn" href="#challenge">Open</a></div>
     <div class="card"><h2>🔄 Isomer Hunt</h2><p>Find and reason about structural isomers.</p><a class="btn" href="#isomer">Open</a></div>
     <div class="card"><h2>✅ Check My Answer</h2><p>Type an answer and receive instant feedback.</p><a class="btn" href="#check">Open</a></div>
-    <div class="card"><h2>👩‍🔬 Doubt Doctor</h2><p>Use AI-guided prompts to explore a doubt.</p><a class="btn" href="#doubt">Open</a></div>
     <div class="card"><h2>🏆 Carbon Quiz</h2><p>Take a 10-question interactive quiz.</p><a class="btn" href="#quiz">Open</a></div>
   </div>
 </section>
@@ -83,23 +82,13 @@ button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accen
 
 <section id="check" class="panel"><div class="card">
 <a class="btn back" href="#home">← Home</a><h2>✅ CHECK MY ANSWER</h2>
-<p>Type the IUPAC name you think is correct. The site will check it.</p>
+<p>Study the formula and type its IUPAC name. The answer is hidden until you submit.</p>
 <div id="checkQuestion" class="question"></div>
 <input id="checkAnswerInput" class="field" placeholder="Enter your proposed IUPAC name">
 <button onclick="checkMyAnswer()">Check Answer</button><div id="checkOut"></div><div class="progress" id="checkProgress"></div>
 <button onclick="nextCheck()">Next Question</button>
 </div></section>
 
-<section id="doubt" class="panel"><div class="card">
-<a class="btn back" href="#home">← Home</a><h2>👩‍🔬 DOUBT DOCTOR</h2>
-<p>Choose a suggested doubt or type your own. The prompt can be opened in ChatGPT for an explanation.</p>
-<div id="doubtQuestion" class="question"></div>
-<textarea id="doubtText" class="field" rows="5" placeholder="Edit the doubt here, or type your own question."></textarea>
-<button onclick="askAI()">Ask AI</button><button class="btn alt" onclick="useSuggestedDoubt()">Use Suggested Doubt</button>
-<div id="doubtOut"></div><div class="progress" id="doubtProgress"></div>
-<button onclick="nextDoubt()">Next Doubt</button>
-<div class="tip"><b>Teacher note:</b> The question bank is stored separately in <b>questions.js</b>, so you can edit the wording later without changing the QR codes.</div>
-</div></section>
 
 <section id="quiz" class="panel"><div class="card">
 <a class="btn back" href="#home">← Home</a><h2>🏆 CARBON QUIZ</h2>
@@ -111,7 +100,7 @@ button,.btn{border:0;border-radius:12px;padding:12px 16px;background:var(--accen
 </main>
 <script src="questions.js"></script>
 <script>
-const state={build:0,name:0,challenge:0,isomer:0,check:0,doubt:0,quiz:0};
+const state={build:0,name:0,challenge:0,isomer:0,check:0,quiz:0};
 
 function nextBuild(){state.build=(state.build+1)%BUILD_QUESTIONS.length;renderBuild()}
 function renderBuild(){const q=BUILD_QUESTIONS[state.build];buildQuestion.textContent=q.question;buildOut.innerHTML='';buildProgress.textContent=`Task ${state.build+1} of ${BUILD_QUESTIONS.length}`}
@@ -132,20 +121,15 @@ function showIsomerAnswer(){const q=ISOMER_QUESTIONS[state.isomer];isomerOut.inn
 function checkIsomer(){const q=ISOMER_QUESTIONS[state.isomer];const a=isomerAnswer.value.trim().toLowerCase();const ok=q.accept.some(x=>x.toLowerCase()===a);isomerOut.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: ${q.answer}<br>${q.explanation}</div>`}
 
 function nextCheck(){state.check=(state.check+1)%CHECK_QUESTIONS.length;checkAnswerInput.value='';checkOut.innerHTML='';renderCheck()}
-function renderCheck(){checkQuestion.textContent=CHECK_QUESTIONS[state.check].question;checkProgress.textContent=`Question ${state.check+1} of ${CHECK_QUESTIONS.length}`}
-function checkMyAnswer(){const q=CHECK_QUESTIONS[state.check];const a=checkAnswerInput.value.trim().toLowerCase();const ok=q.accept.some(x=>x.toLowerCase()===a);checkOut.innerHTML=`<div class=result><b>${ok?'Correct ✓':'Not quite'}</b><br>Expected: <b>${q.answer}</b><br>${q.explanation}</div>`}
-
-function nextDoubt(){state.doubt=(state.doubt+1)%DOUBT_QUESTIONS.length;renderDoubt()}
-function renderDoubt(){const q=DOUBT_QUESTIONS[state.doubt];doubtQuestion.textContent=q.question;doubtText.value=q.question;doubtOut.innerHTML='';doubtProgress.textContent=`Suggested doubt ${state.doubt+1} of ${DOUBT_QUESTIONS.length}`}
-function useSuggestedDoubt(){doubtText.value=DOUBT_QUESTIONS[state.doubt].question}
-function askAI(){const d=doubtText.value.trim()||DOUBT_QUESTIONS[state.doubt].question;const p=`You are the Carbonverse AI chemistry mentor. Explain this carbon-compounds doubt at Class 10 Maharashtra State Board level using simple language, one suitable example, and correct misconceptions. Doubt: ${d}`;navigator.clipboard?.writeText(p).catch(()=>{});doubtOut.innerHTML='<div class=result><b>Prompt copied.</b> ChatGPT will open in a new tab. Paste the prompt if it is not already inserted.</div>';window.open('https://chatgpt.com/','_blank')}
+function renderCheck(){checkQuestion.textContent=CHECK_QUESTIONS[state.check].question;checkAnswerInput.value='';checkOut.innerHTML='';checkProgress.textContent=`Question ${state.check+1} of ${CHECK_QUESTIONS.length}`}
+function checkMyAnswer(){const q=CHECK_QUESTIONS[state.check];const a=checkAnswerInput.value.trim().toLowerCase().replace(/[’']/g, "'").replace(/\s+/g,' ');if(!a){checkOut.innerHTML='<div class="tip">Please enter your answer before checking.</div>';return}const ok=q.accept.some(x=>x.toLowerCase().replace(/\s+/g,' ')===a);checkOut.innerHTML=ok?`<div class=result><b>Correct! ✓</b><br>${q.explanation}</div>`:`<div class=result><b>Incorrect — try to understand the clue.</b><br><b>Correct answer:</b> ${q.answer}<br>${q.explanation}</div>`}
 
 function startQuiz(){state.quiz=0;renderQuiz()}
 function renderQuiz(){if(state.quiz>=QUIZ_QUESTIONS.length){quizBox.innerHTML='<div class=result><b>Quiz complete! 🎉</b> You completed all 10 questions.</div>';quizProgress.textContent='10 of 10 completed';return}const q=QUIZ_QUESTIONS[state.quiz];quizBox.innerHTML=`<div class=question>${q.question}</div><div class=options>${q.options.map((o,i)=>`<button onclick="gradeQuiz(${i})">${o}</button>`).join('')}</div>`;quizProgress.textContent=`Question ${state.quiz+1} of ${QUIZ_QUESTIONS.length}`}
 function gradeQuiz(i){const q=QUIZ_QUESTIONS[state.quiz];const ok=i===q.answer;quizBox.innerHTML+=`<div class=result><b>${ok?'Correct ✓':'Review this concept.'}</b><br>${q.explanation}</div><button onclick="nextQuiz()">Next Question</button>`}
 function nextQuiz(){state.quiz++;renderQuiz()}
 
-function route(){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));let id=location.hash.slice(1)||'home';(document.getElementById(id)||document.getElementById('home')).classList.add('active');if(id==='build')renderBuild();if(id==='name')renderName();if(id==='challenge')renderChallenge();if(id==='isomer')renderIsomer();if(id==='check')renderCheck();if(id==='doubt')renderDoubt();if(id==='quiz')startQuiz()}
+function route(){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));let id=location.hash.slice(1)||'home';(document.getElementById(id)||document.getElementById('home')).classList.add('active');if(id==='build')renderBuild();if(id==='name')renderName();if(id==='challenge')renderChallenge();if(id==='isomer')renderIsomer();if(id==='check')renderCheck();if(id==='quiz')startQuiz()}
 window.addEventListener('hashchange',route);route();
 </script>
 </body></html>

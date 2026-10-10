@@ -63,30 +63,19 @@ const ISOMER_QUESTIONS = [
 ];
 
 const CHECK_QUESTIONS = [
- {question:"Check this proposed name for CH₄: 'methane'.",answer:"methane",accept:["methane"],explanation:"Correct. One carbon in a saturated hydrocarbon is methane."},
- {question:"Check this proposed name for CH₃–CH₃: 'ethane'.",answer:"ethane",accept:["ethane"],explanation:"Correct. Two carbons with a single bond form ethane."},
- {question:"Check this proposed name for CH₃–CH₂–CH₃: 'propane'.",answer:"propane",accept:["propane"],explanation:"Correct. Three carbons with only single bonds form propane."},
- {question:"Check this proposed name for CH₂=CH₂: 'ethene'.",answer:"ethene",accept:["ethene"],explanation:"Correct. The C=C double bond is indicated by –ene."},
- {question:"Check this proposed name for CH≡CH: 'ethyne'.",answer:"ethyne",accept:["ethyne"],explanation:"Correct. The C≡C triple bond is indicated by –yne."},
- {question:"Check this proposed name for CH₃–CH₂–OH: 'ethanol'.",answer:"ethanol",accept:["ethanol"],explanation:"Correct. Two carbons plus –OH gives ethanol."},
- {question:"Check this proposed name for CH₃–CH₂–CH₂–OH: 'propan-1-ol'.",answer:"propan-1-ol",accept:["propan-1-ol","1-propanol"],explanation:"Correct. Numbering starts from the end nearer the –OH group."},
- {question:"Check this proposed name for CH₃–COOH: 'ethanoic acid'.",answer:"ethanoic acid",accept:["ethanoic acid"],explanation:"Correct. The –COOH group gives the carboxylic acid name."},
- {question:"Check this proposed name for CH₃–CH₂–CHO: 'propanal'.",answer:"propanal",accept:["propanal"],explanation:"Correct. The terminal –CHO group gives the aldehyde suffix –al."},
- {question:"Check this proposed name for CH₃–CO–CH₃: 'propanone'.",answer:"propanone",accept:["propanone"],explanation:"Correct. The ketone group on a three-carbon chain gives propanone."}
+ {question:"Give the IUPAC name of CH₄.",answer:"methane",accept:["methane"],explanation:"It has one carbon atom and only single bonds, so the name is methane."},
+ {question:"Give the IUPAC name of CH₃–CH₃.",answer:"ethane",accept:["ethane"],explanation:"It has two carbon atoms joined by a single bond, so the name is ethane."},
+ {question:"Give the IUPAC name of CH₃–CH₂–CH₃.",answer:"propane",accept:["propane"],explanation:"The chain has three carbon atoms and only single bonds, so the name is propane."},
+ {question:"Give the IUPAC name of CH₂=CH₂.",answer:"ethene",accept:["ethene"],explanation:"It has two carbon atoms and a carbon-carbon double bond. The suffix is –ene."},
+ {question:"Give the IUPAC name of CH≡CH.",answer:"ethyne",accept:["ethyne"],explanation:"It has two carbon atoms and a carbon-carbon triple bond. The suffix is –yne."},
+ {question:"Give the IUPAC name of CH₃–CH₂–OH.",answer:"ethanol",accept:["ethanol"],explanation:"It has two carbon atoms and the –OH functional group, so it is ethanol."},
+ {question:"Give the IUPAC name of CH₃–CH₂–CH₂–OH.",answer:"propan-1-ol",accept:["propan-1-ol","1-propanol","propanol"],explanation:"The longest chain has three carbon atoms. Number from the end nearest the –OH group: propan-1-ol."},
+ {question:"Give the IUPAC name of CH₃–COOH.",answer:"ethanoic acid",accept:["ethanoic acid"],explanation:"The molecule has two carbon atoms and the –COOH carboxyl group, so it is ethanoic acid."},
+ {question:"Give the IUPAC name of CH₃–CH₂–CHO.",answer:"propanal",accept:["propanal"],explanation:"The chain has three carbon atoms and a terminal –CHO aldehyde group, so the name is propanal."},
+ {question:"Give the IUPAC name of CH₃–CO–CH₃.",answer:"propanone",accept:["propanone","propan-2-one"],explanation:"It has three carbon atoms and a ketone group on the middle carbon, so the name is propanone (propan-2-one)."}
 ];
 
-const DOUBT_QUESTIONS = [
- "Why does carbon form such a large number of compounds?",
- "What is catenation? Give a simple example.",
- "Why is methane saturated?",
- "Why is ethene called an unsaturated hydrocarbon?",
- "What is the difference between a C=C bond and a C≡C bond?",
- "How does a homologous series differ from a random group of compounds?",
- "Why do structural isomers have the same molecular formula?",
- "How do I choose the parent chain while naming a carbon compound?",
- "Why does the numbering of a carbon chain matter in IUPAC nomenclature?",
- "How can I identify a functional group from a structural formula?"
-];
+
 
 const QUIZ_QUESTIONS = [
  {question:"Carbon's ability to bond with itself to form chains is called:",options:["Catenation","Ionisation","Neutralisation","Distillation"],answer:0,explanation:"Catenation is carbon's self-linking ability."},
